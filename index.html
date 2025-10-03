@@ -3,7 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Il Tuo Nome</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Portfolio professionale - Web Developer specializzato in sviluppo frontend e backend con tecnologie moderne.">
+    <meta name="keywords" content="web developer, portfolio, react, node.js, javascript, frontend, backend">
+    <meta name="author" content="Il Tuo Nome">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tuodominio.com/">
+    <meta property="og:title" content="Portfolio - Il Tuo Nome | Web Developer">
+    <meta property="og:description" content="Portfolio professionale - Sviluppatore web specializzato in applicazioni moderne e performanti.">
+    <meta property="og:image" content="https://tuodominio.com/assets/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tuodominio.com/">
+    <meta property="twitter:title" content="Portfolio - Il Tuo Nome | Web Developer">
+    <meta property="twitter:description" content="Portfolio professionale - Sviluppatore web specializzato in applicazioni moderne e performanti.">
+    <meta property="twitter:image" content="https://tuodominio.com/assets/og-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+    <title>Portfolio - Il Tuo Nome | Web Developer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -15,7 +41,10 @@
                 <div class="logo">
                     <h2>Il Tuo Nome</h2>
                 </div>
-                <ul class="nav-menu">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <ul class="nav-menu" role="navigation" aria-label="Menu principale">
                     <li><a href="#home" class="nav-link">Home</a></li>
                     <li><a href="#about" class="nav-link">Chi Sono</a></li>
                     <li><a href="#skills" class="nav-link">Competenze</a></li>
@@ -24,11 +53,11 @@
                     <li><a href="#projects" class="nav-link">Progetti</a></li>
                     <li><a href="#contact" class="nav-link">Contatti</a></li>
                 </ul>
-                <div class="hamburger">
+                <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
@@ -363,26 +392,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <div class="social-links" role="navigation" aria-label="Social media links">
+                        <a href="#" class="social-link" aria-label="LinkedIn profile"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link" aria-label="GitHub profile"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter profile"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram profile"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="contact-form-container">
-                    <form class="contact-form" id="contactForm">
+                    <form class="contact-form" id="contactForm" aria-label="Contact form">
                         <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Nome" required>
+                            <label for="name" class="sr-only">Nome</label>
+                            <input type="text" id="name" name="name" placeholder="Nome" required aria-required="true">
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Email" required>
+                            <label for="email" class="sr-only">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Email" required aria-required="true">
                         </div>
                         <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="Oggetto" required>
+                            <label for="subject" class="sr-only">Oggetto</label>
+                            <input type="text" id="subject" name="subject" placeholder="Oggetto" required aria-required="true">
                         </div>
                         <div class="form-group">
-                            <textarea id="message" name="message" rows="5" placeholder="Messaggio" required></textarea>
+                            <label for="message" class="sr-only">Messaggio</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Messaggio" required aria-required="true"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Invia Messaggio</button>
                     </form>
@@ -398,6 +431,8 @@
         </div>
     </footer>
 
+    <!-- Configuration & Scripts -->
+    <script src="config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

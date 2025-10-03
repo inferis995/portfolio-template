@@ -5,6 +5,19 @@
     box-sizing: border-box;
 }
 
+/* Screen Reader Only - Accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
 :root {
     --primary-color: #00d4ff;
     --secondary-color: #7b2ff7;
@@ -14,6 +27,8 @@
     --text-color: #1a1f36;
     --text-light: #64748b;
     --white: #ffffff;
+    --bg-color: #ffffff;
+    --card-bg: #ffffff;
     --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     --gradient-alt: linear-gradient(135deg, #00d4ff, #7b2ff7, #ff00ff);
     --shadow: 0 10px 30px rgba(0, 212, 255, 0.15);
@@ -21,11 +36,25 @@
     --glow: 0 0 20px rgba(0, 212, 255, 0.5);
 }
 
+/* Dark Mode Colors */
+[data-theme="dark"] {
+    --bg-color: #0a0e27;
+    --card-bg: #1a1f36;
+    --text-color: #e2e8f0;
+    --text-light: #94a3b8;
+    --light-color: #1a1f36;
+    --dark-color: #0a0e27;
+    --white: #e2e8f0;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--white);
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -39,9 +68,10 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: var(--white);
+    background-color: var(--bg-color);
     box-shadow: var(--shadow);
     z-index: 1000;
+    transition: background-color 0.3s ease;
 }
 
 .navbar {
@@ -102,6 +132,9 @@ header {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
 }
 
 .hamburger .bar {
@@ -110,6 +143,36 @@ header {
     background-color: var(--text-color);
     margin: 3px 0;
     transition: 0.3s;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: var(--gradient);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: auto;
+    margin-right: 2rem;
+}
+
+.theme-toggle i {
+    color: var(--white);
+    font-size: 1.2rem;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: var(--glow);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
 }
 
 /* Hero Section */
@@ -272,6 +335,7 @@ section {
 /* About Section */
 .about {
     background-color: var(--light-color);
+    transition: background-color 0.3s ease;
 }
 
 .about-content {
@@ -297,10 +361,11 @@ section {
     display: flex;
     align-items: center;
     gap: 1rem;
-    background-color: var(--white);
+    background-color: var(--card-bg);
     padding: 1rem;
     border-radius: 10px;
     box-shadow: var(--shadow);
+    transition: background-color 0.3s ease;
 }
 
 .info-item i {
@@ -386,10 +451,11 @@ section {
 }
 
 .timeline-content {
-    background-color: var(--white);
+    background-color: var(--card-bg);
     padding: 2rem;
     border-radius: 10px;
     box-shadow: var(--shadow);
+    transition: background-color 0.3s ease;
 }
 
 .timeline-content h3 {
@@ -432,12 +498,12 @@ section {
 }
 
 .education-card {
-    background-color: var(--white);
+    background-color: var(--card-bg);
     padding: 2rem;
     border-radius: 10px;
     box-shadow: var(--shadow);
     text-align: center;
-    transition: transform 0.3s;
+    transition: transform 0.3s, background-color 0.3s ease;
 }
 
 .education-card:hover {
@@ -502,11 +568,11 @@ section {
 }
 
 .project-card {
-    background-color: var(--white);
+    background-color: var(--card-bg);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: var(--shadow);
-    transition: transform 0.3s;
+    transition: transform 0.3s, background-color 0.3s ease;
 }
 
 .project-card:hover {
@@ -693,6 +759,7 @@ section {
     background-color: var(--light-color);
     padding: 2rem;
     border-radius: 10px;
+    transition: background-color 0.3s ease;
 }
 
 .form-group {
@@ -705,10 +772,11 @@ section {
     padding: 12px;
     border: 2px solid transparent;
     border-radius: 8px;
-    background-color: var(--white);
+    background-color: var(--card-bg);
+    color: var(--text-color);
     font-family: inherit;
     font-size: 1rem;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, background-color 0.3s ease;
 }
 
 .form-group input:focus,

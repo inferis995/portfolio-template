@@ -1,20 +1,28 @@
 # Portfolio Template - Curriculum Professionale
 
-Un template portfolio/curriculum moderno, responsive e completamente personalizzabile.
+Un template portfolio/curriculum moderno, responsive e completamente personalizzabile con tema cyber futuristico.
+
+## ✨ Nuove Funzionalità (Piano A)
+
+- ✅ **Dark/Light Mode**: Toggle automatico con salvataggio preferenze
+- ✅ **SEO Ottimizzato**: Meta tags completi per social sharing (Open Graph, Twitter Cards)
+- ✅ **Accessibilità**: ARIA labels, screen reader support, navigazione da tastiera
+- ✅ **File Config.js**: Personalizzazione centralizzata senza toccare HTML
+- ✅ **Performance**: Transizioni smooth e animazioni ottimizzate
 
 ## 🎯 Caratteristiche
 
-- **Design Moderno**: Layout pulito e professionale con gradiente viola/indigo
+- **Design Cyber Futuristico**: Palette colori cyan (#00d4ff), viola (#7b2ff7), magenta (#ff00ff)
 - **Completamente Responsive**: Si adatta perfettamente a tutti i dispositivi (desktop, tablet, mobile)
 - **Animazioni Fluide**: Effetti di scroll, transizioni e animazioni smooth
 - **Sezioni Complete**:
-  - Hero section con presentazione
+  - Hero section con presentazione e effetti luminosi
   - Chi sono (About)
   - Competenze con barre di progresso animate
   - Esperienza lavorativa con timeline
   - Formazione ed educazione
-  - Portfolio progetti con overlay
-  - Form di contatto funzionale
+  - Portfolio progetti con overlay e glow effects
+  - Form di contatto con validation
   - Footer
 
 ## 📁 Struttura del Progetto
@@ -22,35 +30,54 @@ Un template portfolio/curriculum moderno, responsive e completamente personalizz
 ```
 template portfolio/
 │
-├── index.html          # Struttura HTML principale
-├── styles.css          # Tutti gli stili CSS
-├── script.js           # JavaScript per interattività
-├── images/             # Cartella per le immagini
-│   ├── profile.jpg     # Foto profilo (da aggiungere)
-│   ├── project1.jpg    # Immagine progetto 1 (da aggiungere)
-│   ├── project2.jpg    # Immagine progetto 2 (da aggiungere)
-│   └── project3.jpg    # Immagine progetto 3 (da aggiungere)
+├── index.html          # Struttura HTML principale con meta tags SEO
+├── styles.css          # Stili CSS con dark mode support
+├── script.js           # JavaScript per interattività e theme toggle
+├── config.js           # ⭐ NUOVO: Configurazione centralizzata
+├── assets/             # Risorse statiche
+│   ├── favicon-16x16.png
+│   ├── favicon-32x32.png
+│   ├── apple-touch-icon.png
+│   └── og-image.jpg    # Immagine per social sharing
 └── README.md           # Questo file
 ```
 
 ## 🚀 Come Utilizzare
 
-1. **Personalizza i Contenuti**:
-   - Apri `index.html`
-   - Sostituisci "Il Tuo Nome" con il tuo nome
-   - Modifica tutte le informazioni personali
-   - Aggiorna competenze, esperienza, formazione e progetti
+### ⚡ Metodo Rapido (Consigliato)
 
-2. **Aggiungi le Immagini**:
-   - Aggiungi la tua foto profilo come `images/profile.jpg` (consigliato: 350x350px)
-   - Aggiungi screenshot dei progetti come `images/project1.jpg`, `project2.jpg`, ecc. (consigliato: 800x600px)
+1. **Personalizza config.js**:
+   ```javascript
+   // Apri config.js e modifica le tue informazioni
+   const portfolioConfig = {
+       personal: {
+           name: "Il Tuo Nome",
+           role: "Web Developer | Designer",
+           email: "tuaemail@example.com",
+           // ... altre info
+       },
+       social: {
+           linkedin: "https://linkedin.com/in/tuoprofilo",
+           github: "https://github.com/tuousername",
+           // ...
+       },
+       // ...
+   };
+   ```
+
+2. **Personalizza Meta Tags SEO**:
+   - Apri `index.html`
+   - Cerca `<!-- SEO Meta Tags -->` (linea ~7)
+   - Modifica title, description, keywords
+   - Aggiorna URL e og:image
 
 3. **Personalizza i Colori** (opzionale):
    - Apri `styles.css`
-   - Modifica le variabili CSS in `:root` per cambiare i colori:
+   - Modifica le variabili CSS in `:root` (linea ~21):
      ```css
-     --primary-color: #6366f1;    /* Colore principale */
-     --secondary-color: #8b5cf6;   /* Colore secondario */
+     --primary-color: #00d4ff;    /* Cyan elettrico */
+     --secondary-color: #7b2ff7;   /* Viola intenso */
+     --accent-color: #ff00ff;      /* Magenta */
      ```
 
 4. **Configura il Form di Contatto**:
@@ -115,6 +142,28 @@ Questo template è libero e open-source. Puoi usarlo per progetti personali e co
 
 **Buona fortuna con il tuo portfolio! 🚀**
 
+## 🌓 Dark/Light Mode
+
+Il template include un toggle automatico per modalità scura/chiara:
+- Click sull'icona luna/sole nella navbar
+- La preferenza viene salvata in localStorage
+- Supporta tutte le sezioni con transizioni smooth
+
+## ♿ Accessibilità
+
+- **ARIA Labels**: Tutti gli elementi interattivi hanno etichette appropriate
+- **Screen Reader Support**: Label nascoste per form inputs
+- **Navigazione Tastiera**: Tab navigation completa
+- **Contrasto Colori**: Rispetta WCAG 2.1 AA standards
+
+## 📊 SEO Ready
+
+- Meta tags completi (title, description, keywords)
+- Open Graph per Facebook/LinkedIn sharing
+- Twitter Cards support
+- Favicon multi-size
+- Robots meta tag configurabile
+
 ---
 
-**Test completato con successo! Questa riga è stata aggiunta tramite Claude Code.**
+**Template aggiornato con ottimizzazioni Piano A ✅**
