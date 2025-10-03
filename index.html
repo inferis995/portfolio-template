@@ -29,6 +29,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Portfolio">
+
     <title>Portfolio - Il Tuo Nome | Web Developer</title>
     <link rel="stylesheet" href="styles.css">
 
@@ -51,6 +58,12 @@
 <body>
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- PWA Install Prompt -->
+    <button id="installBtn" class="install-btn" style="display: none;" aria-label="Install app">
+        <i class="fas fa-download"></i>
+        <span>Installa App</span>
+    </button>
 
     <!-- Header/Navigation -->
     <header>

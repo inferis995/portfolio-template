@@ -17,6 +17,13 @@ Un template portfolio/curriculum moderno, responsive e completamente personalizz
 - ✅ **Form EmailJS**: Integrazione EmailJS ready con fallback demo mode
 - ✅ **Font Awesome Optimization**: Guida completa per ottimizzazione caricamento
 
+### Piano C - Premium (PWA) ✅
+- ✅ **Progressive Web App**: Installabile come app su desktop e mobile
+- ✅ **Service Worker**: Caching intelligente e supporto offline
+- ✅ **Install Prompt**: Pulsante floating "Installa App" automatico
+- ✅ **Manifest.json**: Configurazione PWA completa con icone multiple
+- ✅ **Guida Icone**: Documento dettagliato per creazione icone PWA
+
 ## 🎯 Caratteristiche
 
 - **Design Cyber Futuristico**: Palette colori cyan (#00d4ff), viola (#7b2ff7), magenta (#ff00ff)
@@ -37,16 +44,20 @@ Un template portfolio/curriculum moderno, responsive e completamente personalizz
 ```
 template portfolio/
 │
-├── index.html          # Struttura HTML principale con meta tags SEO
-├── styles.css          # Stili CSS con dark mode support
-├── script.js           # JavaScript per interattività e theme toggle
-├── config.js           # ⭐ NUOVO: Configurazione centralizzata
-├── assets/             # Risorse statiche
+├── index.html              # Struttura HTML principale con meta tags SEO
+├── styles.css              # Stili CSS con dark mode support
+├── script.js               # JavaScript per interattività e theme toggle
+├── config.js               # Configurazione centralizzata
+├── manifest.json           # ⭐ PWA manifest configuration
+├── service-worker.js       # ⭐ Service worker per offline support
+├── ICONE-PWA-GUIDA.md     # ⭐ Guida creazione icone PWA
+├── assets/                 # Risorse statiche
 │   ├── favicon-16x16.png
 │   ├── favicon-32x32.png
 │   ├── apple-touch-icon.png
-│   └── og-image.jpg    # Immagine per social sharing
-└── README.md           # Questo file
+│   ├── og-image.jpg        # Immagine per social sharing
+│   └── icon-*.png          # Icone PWA (da creare, vedi guida)
+└── README.md               # Questo file
 ```
 
 ## 🚀 Come Utilizzare
@@ -199,6 +210,49 @@ Effetto Canvas con 80 particelle cyan che si muovono e si connettono nella hero 
 2. **Solid + Brands** (400KB) - Consigliato, -55% peso
 3. **Kit Personalizzato** - Solo icone usate, massima performance
 
+## 📱 Funzionalità PWA (Piano C)
+
+### Progressive Web App
+Il portfolio è **installabile come app nativa** su:
+- ✅ Desktop (Chrome, Edge, Safari)
+- ✅ Android (Chrome, Samsung Internet)
+- ✅ iOS (Safari - con limitazioni)
+
+### Service Worker & Offline
+- **Cache intelligente**: Prima visita carica tutto, poi funziona offline
+- **Aggiornamenti automatici**: Controlla nuove versioni ogni minuto
+- **Strategie cache**:
+  - Network first per contenuti dinamici
+  - Cache first per assets statici
+  - Fallback offline per errori di rete
+
+### Install Button
+Pulsante floating "Installa App" appare automaticamente quando:
+- Il sito è servito via HTTPS
+- L'utente non ha già installato l'app
+- Il browser supporta PWA install
+
+**Personalizzazione:**
+- `manifest.json` (linea 2-3): Modifica nome e descrizione
+- `service-worker.js` (linea 4): Cambia versione cache per forzare update
+- Nascondi pulsante: rimuovi da `index.html` linea ~63
+
+### Icone PWA
+**IMPORTANTE**: Il PWA funziona senza icone, ma per installarlo serve almeno:
+- `icon-192x192.png`
+- `icon-512x512.png`
+
+Vedi guida completa in [ICONE-PWA-GUIDA.md](ICONE-PWA-GUIDA.md)
+
+**Quick setup:**
+1. Vai su https://www.pwabuilder.com/imageGenerator
+2. Carica logo 512x512px
+3. Scarica icone generate
+4. Copia in `assets/`
+
 ---
 
-**Template aggiornato: Piano A + Piano B ✅**
+**Template completo: Piano A + B + C ✅**
+
+🎉 Portfolio moderno, responsive, installabile, con dark mode, particelle animate, form EmailJS e supporto offline!
+

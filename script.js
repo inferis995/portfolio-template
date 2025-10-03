@@ -1,3 +1,69 @@
+// ========================================
+// SERVICE WORKER REGISTRATION (PWA)
+// ========================================
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+                console.log('✅ ServiceWorker registered:', registration.scope);
+
+                // Check for updates periodically
+                setInterval(() => {
+                    registration.update();
+                }, 60000); // Check every minute
+            })
+            .catch((error) => {
+                console.log('❌ ServiceWorker registration failed:', error);
+            });
+    });
+}
+
+// ========================================
+// PWA INSTALL PROMPT
+// ========================================
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault();
+
+    // Store the event for later use
+    deferredPrompt = e;
+
+    // Show install button
+    installBtn.style.display = 'flex';
+
+    console.log('💾 PWA install prompt available');
+});
+
+installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) {
+        return;
+    }
+
+    // Show the install prompt
+    deferredPrompt.prompt();
+
+    // Wait for the user's response
+    const { outcome } = await deferredPrompt.userChoice;
+
+    console.log(`User response to install prompt: ${outcome}`);
+
+    // Clear the deferredPrompt for next time
+    deferredPrompt = null;
+
+    // Hide the install button
+    installBtn.style.display = 'none';
+});
+
+// Detect if app is already installed
+window.addEventListener('appinstalled', () => {
+    console.log('✅ PWA installed successfully');
+    installBtn.style.display = 'none';
+    deferredPrompt = null;
+});
+
 // Particles Animation in Hero Section
 const canvas = document.getElementById('particlesCanvas');
 const ctx = canvas.getContext('2d');
