@@ -609,6 +609,7 @@ section {
     position: absolute;
     inset: 0;
     background: radial-gradient(circle at center, rgba(0, 212, 255, 0.2), transparent 70%);
+    z-index: 0;
 }
 
 .project-main-icon {
@@ -638,6 +639,7 @@ section {
     opacity: 0;
     transition: opacity 0.3s;
     backdrop-filter: blur(10px);
+    z-index: 2;
 }
 
 .project-card:hover .project-overlay {
@@ -654,6 +656,7 @@ section {
     justify-content: center;
     border-radius: 50%;
     transition: transform 0.3s;
+    z-index: 3;
 }
 
 .project-link:hover {
