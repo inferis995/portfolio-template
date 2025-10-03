@@ -2,19 +2,18 @@
 // Version 1.0.0
 
 const CACHE_NAME = 'portfolio-v1';
-const OFFLINE_URL = '/';
+const OFFLINE_URL = './';
 
 // Files to cache for offline functionality
 const CACHE_URLS = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/config.js',
-    '/manifest.json',
-    // Add your assets here as needed
-    // '/assets/icon-192x192.png',
-    // '/assets/icon-512x512.png',
+    './',
+    './index.html',
+    './styles.css',
+    './script.js',
+    './config.js',
+    './manifest.json',
+    './assets/icon-192x192.png',
+    './assets/icon-512x512.png',
 ];
 
 // Install event - cache files
