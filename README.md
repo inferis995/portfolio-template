@@ -2,13 +2,20 @@
 
 Un template portfolio/curriculum moderno, responsive e completamente personalizzabile con tema cyber futuristico.
 
-## ✨ Nuove Funzionalità (Piano A)
+## ✨ Nuove Funzionalità
 
+### Piano A - Essenziale ✅
 - ✅ **Dark/Light Mode**: Toggle automatico con salvataggio preferenze
 - ✅ **SEO Ottimizzato**: Meta tags completi per social sharing (Open Graph, Twitter Cards)
 - ✅ **Accessibilità**: ARIA labels, screen reader support, navigazione da tastiera
 - ✅ **File Config.js**: Personalizzazione centralizzata senza toccare HTML
 - ✅ **Performance**: Transizioni smooth e animazioni ottimizzate
+
+### Piano B - Professionale ✅
+- ✅ **Scroll Progress Bar**: Barra di progresso in alto con gradiente cyber
+- ✅ **Particelle Animate**: Effetto particelle Canvas nella hero section (80 particelle con connessioni)
+- ✅ **Form EmailJS**: Integrazione EmailJS ready con fallback demo mode
+- ✅ **Font Awesome Optimization**: Guida completa per ottimizzazione caricamento
 
 ## 🎯 Caratteristiche
 
@@ -80,13 +87,20 @@ template portfolio/
      --accent-color: #ff00ff;      /* Magenta */
      ```
 
-4. **Configura il Form di Contatto**:
-   - Il form attualmente mostra solo un alert
-   - Per renderlo funzionale, modifica `script.js` nella sezione "Contact Form Handling"
-   - Puoi integrare servizi come:
-     - [Formspree](https://formspree.io/)
-     - [EmailJS](https://www.emailjs.com/)
-     - Il tuo backend personalizzato
+4. **Configura EmailJS (Form Contatto)**:
+   - Registrati gratis su [EmailJS](https://www.emailjs.com/)
+   - Crea un servizio email e un template
+   - Apri `script.js` e cerca `EMAILJS_CONFIG` (linea ~239)
+   - Inserisci i tuoi ID e imposta `enabled: true`
+
+   ```javascript
+   const EMAILJS_CONFIG = {
+       enabled: true,              // Abilita EmailJS
+       serviceID: 'service_abc123',
+       templateID: 'template_xyz456',
+       publicKey: 'user_ABC123XYZ'
+   };
+   ```
 
 ## 🎨 Personalizzazione Avanzata
 
@@ -164,6 +178,27 @@ Il template include un toggle automatico per modalità scura/chiara:
 - Favicon multi-size
 - Robots meta tag configurabile
 
+## 🎨 Funzionalità Piano B
+
+### Scroll Progress Bar
+Barra di progresso cyan in alto che si riempie durante lo scroll della pagina.
+
+### Particelle Animate
+Effetto Canvas con 80 particelle cyan che si muovono e si connettono nella hero section. Ottimizzato per performance.
+
+### Form Contatto EmailJS
+- **Demo Mode**: Funziona subito senza configurazione (mostra alert)
+- **EmailJS Mode**: Configura i tuoi dati per invii email reali
+- **Feedback Visivo**: Messaggi di successo/errore colorati
+- **Loading State**: Spinner durante invio
+- **Validazione**: Email e campi obbligatori
+
+### Font Awesome Optimization
+3 opzioni documentate nell'HTML:
+1. **All.min.css** (900KB) - Completo ma lento
+2. **Solid + Brands** (400KB) - Consigliato, -55% peso
+3. **Kit Personalizzato** - Solo icone usate, massima performance
+
 ---
 
-**Template aggiornato con ottimizzazioni Piano A ✅**
+**Template aggiornato: Piano A + Piano B ✅**

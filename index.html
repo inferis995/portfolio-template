@@ -31,9 +31,27 @@
 
     <title>Portfolio - Il Tuo Nome | Web Developer</title>
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Font Awesome - OTTIMIZZAZIONE OPZIONALE -->
+    <!-- OPZIONE 1 (Attuale): Tutti gli stili (900KB - più lento ma completo) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- OPZIONE 2 (Consigliata): Solo Solid + Brands (400KB - più veloce) -->
+    <!-- Decommenta queste righe e rimuovi la riga sopra per ottimizzare:
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
+    -->
+
+    <!-- OPZIONE 3 (Più veloce): Font Awesome Kit personalizzato -->
+    <!-- 1. Vai su https://fontawesome.com/kits -->
+    <!-- 2. Crea un kit con solo le icone usate -->
+    <!-- 3. Sostituisci con: <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script> -->
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <!-- Header/Navigation -->
     <header>
         <nav class="navbar">
@@ -64,6 +82,7 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <canvas id="particlesCanvas" class="particles-canvas"></canvas>
         <div class="hero-content">
             <div class="hero-text">
                 <h1>Ciao, sono <span class="highlight">Il Tuo Nome</span></h1>

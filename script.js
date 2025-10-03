@@ -1,3 +1,91 @@
+// Particles Animation in Hero Section
+const canvas = document.getElementById('particlesCanvas');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+const particleCount = 80;
+
+// Set canvas size
+function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Particle class
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1;
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 212, 255, 0.5)';
+        ctx.fill();
+    }
+}
+
+// Create particles
+for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+}
+
+// Animation loop
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Update and draw particles
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+
+    // Draw connections
+    particles.forEach((p1, i) => {
+        particles.slice(i + 1).forEach(p2 => {
+            const dx = p1.x - p2.x;
+            const dy = p1.y - p2.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 120) {
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(0, 212, 255, ${0.2 * (1 - distance / 120)})`;
+                ctx.lineWidth = 0.5;
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+            }
+        });
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+// Scroll Progress Bar
+const scrollProgress = document.getElementById('scrollProgress');
+
+window.addEventListener('scroll', () => {
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    scrollProgress.style.width = scrolled + '%';
+});
+
 // Dark/Light Mode Toggle
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = themeToggle.querySelector('i');
@@ -137,10 +225,27 @@ animatedElements.forEach(el => {
     animateOnScroll.observe(el);
 });
 
-// Contact Form Handling
+// Contact Form Handling with EmailJS
 const contactForm = document.getElementById('contactForm');
+const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+// ========================================
+// CONFIGURAZIONE EMAILJS (PERSONALIZZA QUESTI VALORI)
+// ========================================
+// 1. Registrati su https://www.emailjs.com/
+// 2. Crea un servizio email
+// 3. Crea un template email
+// 4. Sostituisci i valori qui sotto:
+const EMAILJS_CONFIG = {
+    enabled: false,  // Cambia in true per abilitare EmailJS
+    serviceID: 'YOUR_SERVICE_ID',     // Es: 'service_abc123'
+    templateID: 'YOUR_TEMPLATE_ID',   // Es: 'template_xyz456'
+    publicKey: 'YOUR_PUBLIC_KEY'      // Es: 'user_ABC123XYZ'
+};
+// ========================================
+
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         // Get form values
@@ -151,47 +256,87 @@ if (contactForm) {
 
         // Basic validation
         if (!name || !email || !subject || !message) {
-            alert('Per favore, compila tutti i campi!');
+            showFormMessage('Per favore, compila tutti i campi!', 'error');
             return;
         }
 
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert('Per favore, inserisci un\'email valida!');
+            showFormMessage('Per favore, inserisci un\'email valida!', 'error');
             return;
         }
 
-        // Here you would typically send the form data to a server
-        // For now, we'll just show a success message
-        alert('Messaggio inviato con successo! Ti risponderò al più presto.');
-        contactForm.reset();
+        // Disable button and show loading
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Invio...';
 
-        // Example of how you might send data to a server:
-        /*
-        fetch('your-api-endpoint', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                subject: subject,
-                message: message
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert('Messaggio inviato con successo!');
-            contactForm.reset();
-        })
-        .catch(error => {
-            alert('Errore nell\'invio del messaggio. Riprova più tardi.');
-            console.error('Error:', error);
-        });
-        */
+        // Send with EmailJS if enabled
+        if (EMAILJS_CONFIG.enabled) {
+            try {
+                // Load EmailJS library if not already loaded
+                if (typeof emailjs === 'undefined') {
+                    const script = document.createElement('script');
+                    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+                    document.head.appendChild(script);
+
+                    await new Promise(resolve => {
+                        script.onload = resolve;
+                    });
+
+                    emailjs.init(EMAILJS_CONFIG.publicKey);
+                }
+
+                // Send email
+                const response = await emailjs.send(
+                    EMAILJS_CONFIG.serviceID,
+                    EMAILJS_CONFIG.templateID,
+                    {
+                        from_name: name,
+                        from_email: email,
+                        subject: subject,
+                        message: message
+                    }
+                );
+
+                showFormMessage('Messaggio inviato con successo! Ti risponderò al più presto.', 'success');
+                contactForm.reset();
+            } catch (error) {
+                console.error('EmailJS Error:', error);
+                showFormMessage('Errore nell\'invio del messaggio. Riprova più tardi.', 'error');
+            }
+        } else {
+            // Fallback: Just show success (demo mode)
+            setTimeout(() => {
+                showFormMessage('Messaggio inviato con successo! (Modalità demo - configura EmailJS per invii reali)', 'success');
+                contactForm.reset();
+            }, 1000);
+        }
+
+        // Re-enable button
+        setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Invia Messaggio';
+        }, 2000);
     });
+}
+
+// Show form message helper
+function showFormMessage(message, type) {
+    const existingMessage = document.querySelector('.form-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `form-message form-message-${type}`;
+    messageDiv.textContent = message;
+    contactForm.insertBefore(messageDiv, contactForm.firstChild);
+
+    setTimeout(() => {
+        messageDiv.style.opacity = '0';
+        setTimeout(() => messageDiv.remove(), 300);
+    }, 5000);
 }
 
 // Navbar Background on Scroll
