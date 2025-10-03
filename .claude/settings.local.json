@@ -3,7 +3,14 @@
     "allow": [
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(start \"\" \"C:\\Users\\Utente\\template portfolio\\assets\\generate-icons.html\")",
+      "Bash(for file in icon-*\" (1).png\")",
+      "Bash(do mv \"$file\" \"$file% (1).png.png\")",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generatore Icone PWA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #0a0e27;
+            color: white;
+        }
+        h1 { color: #00d4ff; }
+        .controls {
+            background: #1a1f36;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 15px 30px;
+        }
+        button:hover { opacity: 0.8; }
+        canvas {
+            display: none;
+        }
+        .preview {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .preview img {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .instructions {
+            background: #7b2ff744;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Generatore Icone PWA Portfolio</h1>
+
+    <div class="controls">
+        <h3>Personalizza:</h3>
+        <label>Testo (Iniziali o Logo):</label><br>
+        <input type="text" id="iconText" value="P" maxlength="2" style="font-size: 24px; width: 100px;">
+        <br><br>
+        <label>Colore Sfondo:</label><br>
+        <input type="color" id="bgColor" value="#00d4ff">
+        <br><br>
+        <label>Colore Testo:</label><br>
+        <input type="color" id="textColor" value="#ffffff">
+        <br><br>
+        <button onclick="generateIcons()">📥 Genera e Scarica Icone</button>
+    </div>
+
+    <div class="preview" id="preview"></div>
+
+    <div class="instructions">
+        <h3>📋 Istruzioni:</h3>
+        <ol>
+            <li>Personalizza testo e colori sopra</li>
+            <li>Click "Genera e Scarica Icone"</li>
+            <li>Si scaricheranno automaticamente 8 icone PNG</li>
+            <li>Salva tutte nella cartella <code>assets/</code></li>
+            <li>Ricarica il portfolio su GitHub Pages</li>
+            <li>Il pulsante "Installa App" apparirà!</li>
+        </ol>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+
+        function generateIcons() {
+            const text = document.getElementById('iconText').value || 'P';
+            const bgColor = document.getElementById('bgColor').value;
+            const textColor = document.getElementById('textColor').value;
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const preview = document.getElementById('preview');
+
+            preview.innerHTML = '';
+
+            sizes.forEach(size => {
+                // Set canvas size
+                canvas.width = size;
+                canvas.height = size;
+
+                // Draw background gradient
+                const gradient = ctx.createLinearGradient(0, 0, size, size);
+                gradient.addColorStop(0, bgColor);
+                gradient.addColorStop(1, '#7b2ff7');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, size, size);
+
+                // Draw text
+                ctx.fillStyle = textColor;
+                ctx.font = `bold ${size * 0.5}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, size / 2, size / 2);
+
+                // Add glow effect
+                ctx.shadowColor = textColor;
+                ctx.shadowBlur = size * 0.05;
+                ctx.fillText(text, size / 2, size / 2);
+
+                // Download with delay to avoid popup blocker
+                canvas.toBlob(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `icon-${size}x${size}.png`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+
+                    setTimeout(() => {
+                        URL.revokeObjectURL(url);
+                    }, 100);
+
+                    // Show preview for 192x192
+                    if (size === 192) {
+                        const img = document.createElement('img');
+                        img.src = url;
+                        img.width = 100;
+                        img.title = `Preview ${size}x${size}`;
+                        preview.appendChild(img);
+
+                        setTimeout(() => {
+                            alert('✅ Download di 8 icone completato!\nSalva tutti i file nella cartella assets/');
+                        }, 500);
+                    }
+                }, 'image/png');
+            });
+        }
+    </script>
+</body>
+</html>
